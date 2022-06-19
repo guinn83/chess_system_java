@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Aula_Chess_Game_POO:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Aula_Chess_Game_POO_jar</output-path>
+    <root id="archive" name="Aula_Chess_Game_POO.jar">
+      <element id="module-output" name="Aula_Chess_Game_POO" />
+    </root>
+  </artifact>
+</component>
