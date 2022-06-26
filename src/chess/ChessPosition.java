@@ -3,8 +3,8 @@ package chess;
 import boardgame.Position;
 
 public class ChessPosition {
-    private char column;
-    private Integer row;
+    private final char column;
+    private final Integer row;
 
     public ChessPosition(char column, Integer row) {
         if (column < 'a' || column > 'h' || row < 1 || row > 8) {
