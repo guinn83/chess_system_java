@@ -137,7 +137,7 @@ public class ChessMatch {
         placeNewPiece('e', 8, new King(board, Color.BLACK));
         for (int i = 0; i < 8; i++) {
             placeNewPiece((char) ('a' + i), 2, new Pawn(board, Color.WHITE, this));
-            placeNewPiece((char) ('a' + i), 3, new Pawn(board, Color.BLACK, this));
+            placeNewPiece((char) ('a' + i), 7, new Pawn(board, Color.BLACK, this));
         }
     }
 
