@@ -2,35 +2,48 @@ package chess.pieces;
 
 import boardgame.Board;
 import boardgame.Position;
+import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.Color;
 
 public class Pawn extends ChessPiece {
-    public Pawn(Board board, Color color) {
-        super(board, color);
-    }
 
-    @Override
-    public String toString() {
-        return "P";
+    private ChessMatch chessMatch;
+    public Pawn(Board board, Color color, ChessMatch chessMatch) {
+        super(board, color);
+        this.chessMatch = chessMatch;
     }
 
     @Override
     public boolean[][] possibleMoves() {
         boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
 
-        Position p = new Position(0, 0);
+        int colorMove = getColor() == Color.WHITE ? -1 : 1;
 
-        //Acima
-        p.setValues(p.getRow() - 1, p.getColumn());
-        while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
-            mat[p.getRow()][p.getColumn()] = true;
-            p.setRow(p.getRow() - 1);
+        //mover
+        checkMovePiece(mat, colorMove, 0, false, false);
+        Position p2 = new Position(position.getRow() + colorMove, position.getColumn());
+        if (getBoard().positionExists(p2) && !getBoard().thereIsAPiece(p2) && getMoveCount() == 0) {
+            checkMovePiece(mat, getColor() == Color.WHITE ? -2 : 2, 0, false, false);
         }
-        if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-            mat[p.getRow()][p.getColumn()] = true;
+        //mover e capturar
+        p2.setValues(position.getRow() + colorMove, position.getColumn() - 1);
+        if (getBoard().positionExists(p2) && isThereOpponentPiece(p2)) {
+            checkMovePiece(mat, colorMove, -1, true, false);
+        }
+        p2.setValues(position.getRow() + colorMove, position.getColumn() + 1);
+        if (getBoard().positionExists(p2) && isThereOpponentPiece(p2)) {
+            checkMovePiece(mat, colorMove, 1, true, false);
         }
 
         return mat;
     }
+
+
+
+    @Override
+    public String toString() {
+        return "P";
+    }
+
 }
