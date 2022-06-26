@@ -61,7 +61,9 @@ public class UI {
         System.out.print("Waiting player: ");
         String playerANSIColor = (chessMatch.getCurrentPlayer() == Color.WHITE) ? playerWhiteANSI : playerBlackANSI;
         System.out.println(playerANSIColor + chessMatch.getCurrentPlayer() + ANSI_RESET);
-
+        if (chessMatch.getCheck()) {
+            System.out.println("CHECK!");
+        }
     }
 
     public static void printBoard(ChessPiece[][] pieces) {
