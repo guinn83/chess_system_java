@@ -18,7 +18,7 @@ public class Pawn extends ChessPiece {
     public boolean[][] possibleMoves() {
         boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
 
-        int colorMove = getColor() == Color.WHITE ? -1 : 1;
+        int colorMove = (getColor() == Color.WHITE) ? -1 : 1;
 
         //mover
         checkMovePiece(mat, colorMove, 0, false, false);
@@ -38,7 +38,16 @@ public class Pawn extends ChessPiece {
         }
 
         //enPassant logic
-
+        if (position.getRow() == (getColor() == Color.WHITE ? 3 : 4)) {
+            Position left = new Position(position.getRow(), position.getColumn() - 1);
+            if (getBoard().positionExists(left) && isThereOpponentPiece(left) && getBoard().piece(left) == chessMatch.getEnPassantVulnerable()) {
+                mat[left.getRow() + colorMove][left.getColumn()] = true;
+            }
+            Position right = new Position(position.getRow(), position.getColumn() + 1);
+            if (getBoard().positionExists(right) && isThereOpponentPiece(right) && getBoard().piece(right) == chessMatch.getEnPassantVulnerable()) {
+                mat[right.getRow() + colorMove][right.getColumn()] = true;
+            }
+        }
 
         return mat;
     }
